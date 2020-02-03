@@ -48,7 +48,7 @@ def create_probe(
     blobs: ['conv3', 'conv4', 'conv5'] to probe
     '''
     if verbose:
-        print 'Opening dataset', dataset
+        print('Opening dataset', dataset)
     data = loadseg.SegmentationData(args.dataset)
 
     # the network to dissect
@@ -98,7 +98,7 @@ def create_probe(
 
     # Create new (empty) mmaps
     if verbose:
-         print 'Creating new mmaps.'
+         print('Creating new mmaps.')
     out = {}
     rot = None
     if rotation_seed is not None:
@@ -117,7 +117,7 @@ def create_probe(
 
     # The main loop
     if verbose:
-         print 'Beginning work.'
+         print('Beginning work.')
     pf = loadseg.SegmentationPrefetcher(data, categories=['image'],
             split=split, once=True, batch_size=batch_size, ahead=ahead)
     index = 0
@@ -140,7 +140,7 @@ def create_probe(
         batch_rate = batch_size / (batch_time - last_batch_time + 1e-15)
         last_batch_time = batch_time
         if verbose:
-            print 'netprobe index', index, 'items per sec', batch_rate, rate
+            print('netprobe index', index, 'items per sec', batch_rate, rate)
             sys.stdout.flush()
         inp = batch[0]
         batch_size = len(inp)
@@ -167,7 +167,7 @@ def create_probe(
             "Data source should return evey item once %d %d." %
             (index, data_size))
     if verbose:
-        print 'Renaming mmaps.'
+        print('Renaming mmaps.')
     for blob in blobs:
         ed.finish_mmap(out[blob])
 
@@ -186,7 +186,7 @@ def ensure_dir(targetdir):
         try:
             os.makedirs(targetdir)
         except:
-            print 'Could not create', targetdir
+            print('Could not create', targetdir)
             pass
 
 def write_readme_file(args, ed, verbose):
@@ -197,7 +197,7 @@ def write_readme_file(args, ed, verbose):
         def report(txt):
             f.write('%s\n' % txt)
             if verbose:
-                print txt
+                print(txt)
         title = '%s network probe' % ed.basename()
         report('%s\n%s' % (title, '=' * len(title)))
         for key, val in args:
