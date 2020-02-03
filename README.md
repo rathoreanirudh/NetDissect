@@ -89,3 +89,5 @@ If you find the codes useful, please cite this paper
 }
 ```
 
+## Notes 
+- working with Pillow==6.1
